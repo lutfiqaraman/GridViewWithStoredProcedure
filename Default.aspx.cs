@@ -14,11 +14,13 @@ namespace CRUDWithSPDataGrid
         readonly string cs = ConnectionString.GetConnectionString();
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Name of the stored procedure
             string spName = "spCRUDINFO";
 
             SqlConnection conn = new SqlConnection(cs);
             SqlCommand cmd = new SqlCommand(spName, conn);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            
             DataSet dataset = new DataSet();
 
             cmd.CommandType = CommandType.StoredProcedure;
