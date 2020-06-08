@@ -12,7 +12,14 @@ namespace CRUDWithSPDataGrid
     public partial class Default : System.Web.UI.Page
     {
         readonly string cs = ConnectionString.GetConnectionString();
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+            GetData();
+        }
+
+        // Get data of a table to be filled in a gridview
+        void GetData()
         {
             // Name of the stored procedure
             string spName = "spCRUDINFO";
@@ -20,7 +27,7 @@ namespace CRUDWithSPDataGrid
             SqlConnection conn = new SqlConnection(cs);
             SqlCommand cmd = new SqlCommand(spName, conn);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            
+
             DataSet dataset = new DataSet();
 
             cmd.CommandType = CommandType.StoredProcedure;
@@ -37,7 +44,7 @@ namespace CRUDWithSPDataGrid
                 conn.Open();
 
                 adapter.Fill(dataset);
-    
+
                 gvInfo.DataSource = dataset;
                 gvInfo.DataBind();
             }
